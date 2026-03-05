@@ -1,0 +1,41 @@
+flowchart TD
+
+    A[Application Launch] --> B[Initialize JavaFX Stage]
+    B --> C[Create Board Model]
+    C --> D[Place Mines]
+    D --> E[Calculate Adjacent Counts]
+    E --> F[Create UI Grid]
+    F --> G[Display Scene]
+
+    G --> H{User Clicks Cell}
+
+    H --> I{Left Click or Right Click}
+
+    I -- Left Click --> J[Reveal Selected Cell]
+    I -- Right Click --> K[Toggle Flag State]
+
+    K --> L[Update UI Cell Appearance]
+    L --> H
+
+    J --> M{Cell Is Mine}
+
+    M -- Yes --> N[Reveal All Mines]
+    N --> O[Display Game Over Message]
+    O --> P{Restart Game}
+
+    P -- Yes --> C
+    P -- No --> Q[End Application]
+
+    M -- No --> R{Adjacent Count Is Zero}
+
+    R -- Yes --> S[Reveal Neighbor Cells Recursively]
+    S --> T[Update UI Grid]
+
+    R -- No --> T
+
+    T --> U{All Safe Cells Revealed}
+
+    U -- Yes --> V[Display Win Message]
+    V --> P
+
+    U -- No --> H
