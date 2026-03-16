@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * Enumeration of card ranks in a standard deck.
+ */
 public enum Rank {
     TWO(2),
     THREE(3),
@@ -17,10 +20,18 @@ public enum Rank {
 
     private final int value;
 
+    /**
+     * Constructs a Rank with the given value.
+     * @param value the value of the rank
+     */
     Rank(int value) {
         this.value = value;
     }
 
+    /**
+     * Gets the value of the rank.
+     * @return the value
+     */
     public int getValue() {
         return value;
     }

@@ -6,13 +6,20 @@ import java.util.Scanner;
 import model.Deck;
 import model.GameResult;
 
+/**
+ * Represents a console-based Blackjack game.
+ * This class manages the game flow, including dealing cards, player turns, dealer turns, and determining winners.
+ */
 public class BlackJack {
 
-    private Deck deck;
-    private Dealer dealer;
-    private Player player;
-    private Scanner input;
+    final private Deck deck;
+    final private Dealer dealer;
+    final private Player player;
+    final private Scanner input;
 
+    /**
+     * Private constructor for creating a game with a default player name.
+     */
     private BlackJack() {
         this.deck = new Deck();
         this.player = new Player("Player");
@@ -20,6 +27,10 @@ public class BlackJack {
         this.input = new Scanner(System.in);
     }
 
+    /**
+     * Private constructor for creating a game with a specified player name.
+     * @param playerName the name of the player
+     */
     private BlackJack(String playerName) {
         this.deck = new Deck();
         this.player = new Player(playerName);
@@ -27,6 +38,9 @@ public class BlackJack {
         this.input = new Scanner(System.in);
     }
 
+    /**
+     * Starts a new round by clearing hands and shuffling the deck.
+     */
     private void startRound() {
         player.clearHand();
         dealer.clearHand();
@@ -34,6 +48,9 @@ public class BlackJack {
         deck.shuffle();
     }
 
+    /**
+     * Deals the initial two cards to both player and dealer.
+     */
     private void dealInitialCards() {
         player.recieveCard(deck.removeCard());
         dealer.recieveCard(deck.removeCard());
@@ -41,6 +58,9 @@ public class BlackJack {
         dealer.recieveCard(deck.removeCard());
     }
 
+    /**
+     * Handles the player's turn, allowing them to hit or stand until they stand or bust.
+     */
     private void playerTurn() {
         boolean playerPass = false;
         String hitOrStand;
@@ -63,6 +83,9 @@ public class BlackJack {
         }
     }
 
+    /**
+     * Handles the dealer's turn, hitting until the hand value is 17 or higher.
+     */
     private void dealerTurn() {
         boolean dealerUnder17 = (dealer.getHandValue() < 17);
         System.out.println(player.toString());
@@ -74,6 +97,10 @@ public class BlackJack {
         }
     }
 
+    /**
+     * Determines the winner of the round based on hand values and bust conditions.
+     * @return the game result indicating who won or if it's a push
+     */
     private GameResult determineWinner() {
 
         if (player.isBust()) {
@@ -93,6 +120,10 @@ public class BlackJack {
         return GameResult.PUSH;
     }
 
+    /**
+     * Displays the final results of the round to the console.
+     * @param result the game result to display
+     */
     private void displayResult(GameResult result) {
 
         String winner = switch (result) {
@@ -110,6 +141,9 @@ public class BlackJack {
         System.out.println(winner);
     }
 
+    /**
+     * Runs the main game loop, allowing multiple rounds until the player chooses to stop.
+     */
     private void runGameLoop() {
         boolean playing = true;
         while (playing) {
@@ -128,6 +162,11 @@ public class BlackJack {
         }
     }
 
+    /**
+     * The main method to start the Blackjack game.
+     * Prompts for player name and begins the game loop.
+     * @param args command line arguments (not used)
+     */
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.println("Welcome to Blackjack!");

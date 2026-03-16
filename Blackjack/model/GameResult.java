@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * Enumeration of possible game results in Blackjack.
+ */
 public enum GameResult {
     PLAYER_WINS,
     DEALER_WINS,
